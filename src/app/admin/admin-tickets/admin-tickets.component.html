@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <div class="alert alert-success alert-rounded" style="margin-top:20px;display:none;" id="dNTicket">
+        Su ticket ha sido ingresado exitosamente. El numero de ticket asignado es <span id="TicketAsignado"></span>
+        <button type="button" class="close" onclick="window.location.reload();" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+    </div>
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Lista de Tickets</h3>
+        </div>
+    </div>
+    <div class="card-group">
+        <!-- Column -->
+        <div class="card">
+            <div class="card-block text-center">
+                <h4 class="text-center">Total Tickets</h4>
+                <div id="spark8"><canvas width="99" height="70" style="display: inline-block; width: 99px; height: 70px; vertical-align: top;"></canvas></div>
+            </div>
+            <div class="box b-t text-center">
+                <h4 class="font-medium m-b-0"><i class="ti-angle-up text-success"></i> 1</h4>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="card">
+            <div class="card-block text-center">
+                <h4 class="text-center">Tickets en Proceso</h4>
+                <div id="spark9"><canvas width="99" height="70" style="display: inline-block; width: 99px; height: 70px; vertical-align: top;"></canvas></div>
+            </div>
+            <div class="box b-t text-center">
+                <h4 class="font-medium m-b-0"><i class="ti-angle-up text-success"></i> 0</h4>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="card">
+            <div class="card-block text-center">
+                <h4 class="text-center">Tickets Solucionados</h4>
+                <div id="spark10"><canvas width="99" height="70" style="display: inline-block; width: 99px; height: 70px; vertical-align: top;"></canvas></div>
+            </div>
+            <div class="box b-t text-center">
+                <h4 class="font-medium m-b-0"><i class="ti-angle-up text-success"></i> 1</h4>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <div class="nav-tabs">
+        <ul class="nav nav-tabs tabcontent-border" role="tablist">
+            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#enproceso" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">En Proceso</span> </a> </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Finalizados</span></a> </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tabcontent-border">
+            <div class="tab-pane active" id="enproceso" role="tabpanel" aria-expanded="true">
+                <div class="p-l-20">
+                    <br>
+                    <input type="text" class="form-control" id="Buscador_Proc" placeholder="Buscador" style="margin-bottom:10px">
+                    <table class="table color-table info-table" id="TicketsProceso">
+                        <thead>
+                            <tr>
+                                <th># Ticket</th>
+                                <th> Tipo Solicitud</th>
+                                <th> Tipo Soporte</th>
+                                <th> Necesidad</th>
+                                <th> Responsable</th>
+                                <th> Usuario</th>
+                                <th> Estado</th>
+                                <th> Fecha Ingreso</th>
+                                <th> Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:white">
+                            <!-- ngRepeat: dato in Tickets_Ingresados --><!-- ngIf: dato.IdEstado != '23' --><!-- end ngRepeat: dato in Tickets_Ingresados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane" id="finalizados" role="tabpanel" aria-expanded="false">
+                <div class="p-l-20">
+                    <br>
+                    <input type="text" class="form-control" id="Buscador_Fin" placeholder="Buscador" style="margin-bottom:10px">
+                    <table class="table color-table info-table" id="TicketsFin">
+                        <thead>
+                            <tr>
+                                <th># Ticket</th>
+                                <th> Tipo Solicitud</th>
+                                <th> Tipo Soporte</th>
+                                <th> Necesidad</th>
+                                <th> Responsable</th>
+                                <th> Usuario</th>
+                                <th> Estado</th>
+                                <th> Fecha Ingreso</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:white">
+                            <!-- ngRepeat: dato in Tickets_Ingresados --><!-- ngIf: dato.IdEstado === '23' --><tr ng-repeat="dato in Tickets_Ingresados" ng-if="dato.IdEstado === '23'" class="ng-scope">
+                                <td>
+                                    <a data-toggle="modal" href="#modal_long" data-ticket="337" data-necesidad="Se solicita cambio de mouse, el actual tiene problemas al no responder cuando se hace click o se mueve por el escritorio." data-justificacion="" data-adjunto="" class="btn btn-info ng-binding" onclick="EnviarDatos('Modal_VerTicket', 'Home', 'Ticket Nro ' + $(this).attr('data-ticket'), 'modal_long', { 'CodTicket': $(this).attr('data-ticket'), 'Necesidad': $(this).attr('data-necesidad'), 'Justificacion': $(this).attr('data-justificacion'), 'Adjunto': $(this).attr('data-adjunto') })">337</a>
+                                </td>
+                                <td class="ng-binding">INCIDENTE</td>
+                                <td class="ng-binding">HARDWARE</td>
+                                <td style="text-align:justify;width:300px;" class="ng-binding">Se solicita cambio de mouse, el actual tiene problemas al no responder cuando se hace click o se mueve por el escritorio....</td>
+                                <td class="ng-binding">ARODRIGUEZ</td>
+                                <td class="ng-binding">BLLANOS</td>
+                                <td class="ng-binding">Ticket Calificado y Cerrado</td>
+                                <td class="ng-binding">2017-10-27</td>
+                            </tr><!-- end ngIf: dato.IdEstado === '23' --><!-- end ngRepeat: dato in Tickets_Ingresados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+</div>
